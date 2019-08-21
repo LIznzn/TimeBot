@@ -115,35 +115,19 @@ function apiRequestJson($method, $parameters) {
 
 $aboutmsg = "Time Bot 由 @LIznzn 开发，用于快速判断群友时间，目前还在测试中。";
 $timemsg = "你群时间：\n"
-    .chibagettime("CST")."\n"
-    .chibagettime("JST")."\n"
-    .chibagettime("GMT")."\n"
-    .chibagettime("CET")."\n"
-    .chibagettime("EST")."\n"
-    .chibagettime("PST")."\n";
+    .gettime("America/Los_Angeles")."🇺🇸Los Angeles\n"
+    .gettime("America/Vancouver")."🇨🇦Vancouver\n"
+    .gettime("America/New_York")."🇺🇸New York\n"
+    .gettime("Europe/London")."🇬🇧\n"
+    .gettime("Europe/Berlin")."🇩🇪\n"
+    .gettime("Asia/Shanghai")."🇨🇳\n"
+    .gettime("Asia/Tokyo")."🇯🇵\n";
 
 
-function chibagettime($timezone) {
+function gettime($timezone) {
     date_default_timezone_set('UTC');
-    if ($timezone === "CST") {
-        $date=date_create(NULL,timezone_open("Asia/Shanghai"));
-        return date_format($date,"M d H:i ")."🇨🇳";
-    } else if ($timezone === "JST") {
-        $date=date_create(NULL,timezone_open("Asia/Tokyo"));
-        return date_format($date,"M d H:i ")."🇯🇵";
-    } else if ($timezone === "GMT") {
-        $date=date_create(NULL,timezone_open("Europe/London"));
-        return date_format($date,"M d H:i ")."🇬🇧";
-    } else if ($timezone === "CET") {
-        $date=date_create(NULL,timezone_open("Europe/Berlin"));
-        return date_format($date,"M d H:i ")."🇩🇪";
-    } else if ($timezone === "EST") {
-        $date=date_create(NULL,timezone_open("America/New_York"));
-        return date_format($date,"M d H:i ")."🇺🇸NY";
-    } else if ($timezone === "PST") {
-        $date=date_create(NULL,timezone_open("America/Los_Angeles"));
-        return date_format($date,"M d H:i ")."🇺🇸LA";
-    }
+    $date=date_create(NULL,timezone_open($timezone));
+    return date_format($date,"M d H:i ");
 }
 
 function processMessage($message, $timemsg, $aboutmsg) {
