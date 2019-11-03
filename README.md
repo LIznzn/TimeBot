@@ -1,2 +1,2 @@
 # TimeBot
-Telegram Bot: @chibatime_bot
+Telegram Bot: @globaltime_bot
